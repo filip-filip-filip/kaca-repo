@@ -36,7 +36,8 @@ speed = 50
 run = True
 kvad1 = pygame.Rect(0,0,50,50)
 kvad2 = pygame.Rect(0,0,50,50)
-lenght = 7
+kvad3 = pygame.Rect(random.randint(0,500),random.randint(0,500),50,50)
+lenght = 3
 prejsnji = []
 koordkac = []
 
@@ -48,7 +49,7 @@ def konc():
 
 
 
-
+pygame.draw.rect(ekran,(0,255,0),kvad3)
 
 while run:
 
@@ -71,7 +72,7 @@ while run:
     ekran.fill((255,255,255))
     
     
-
+    pygame.draw.rect(ekran,(0,255,0),kvad1)
 
     #premikanje
     pressed = pygame.key.get_pressed()
@@ -84,7 +85,7 @@ while run:
     if pressed[pygame.K_RIGHT]:
         smer = "desno"
     
-    pygame.draw.rect(ekran,(0,255,0),kvad1)
+    pygame.draw.rect(ekran,(255,0,0),kvad3)
 
     if obratzanke == 30:
         if smer == "desno":
@@ -96,10 +97,15 @@ while run:
         if smer == "dol":
             kvad1.y = kvad1.y + speed
         prejsnji.append(xy)
-        koordkac = prejsnji[-lenght:-1]
+        koordkac = prejsnji[-lenght:]
         print(prejsnji)
         print(koordkac)
 
+
+
+    if kvad1.colliderect(kvad3):
+        kvad3 = pygame.Rect(random.randint(0,500),random.randint(0,500),50,50)
+        lenght +=1
 
     for i in koordkac:
         kvad2 = pygame.Rect(i[0],i[1],50,50)
